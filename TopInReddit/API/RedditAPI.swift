@@ -10,7 +10,10 @@ import Foundation
 
 class RedditAPI {
     
-    let itemsPerPage = 5
+    let itemsPerPage = 10
+    
+    // this is the number of cells before reach end of page that we should start loading the next page
+    let numberOfItemsBeforeStartLoadingNextPage = 3
     
     // Store next page for infinite pagination
     var nextPage: String = ""

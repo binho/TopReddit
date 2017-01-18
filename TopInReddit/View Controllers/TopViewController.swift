@@ -10,9 +10,6 @@ import UIKit
 
 class TopViewController: UITableViewController, UISearchBarDelegate, PostCellDelegate {
     
-    // Pagination (this is the number of cells before reach end of page that we should start loading the next page)
-    private let numberOfItemsBeforeLoadingNextPage: Int = 3
-
     // Search/Filter
     var searchBar: UISearchBar!
     private var searchActive : Bool = false
@@ -68,16 +65,28 @@ class TopViewController: UITableViewController, UISearchBarDelegate, PostCellDel
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PostCell.reuseIdentifier, for: indexPath) as! PostCell
         cell.delegate = self
-        
+
         let postViewModel = (searchActive ? filteredResults[indexPath.row] : results[indexPath.row])
         
+        cell.hasImage = postViewModel.post.mediumImageURL != nil
+        
         cell.postViewModel = postViewModel
+        
+        cell.postImageView.image = nil
+        if let imageURL = postViewModel.post.mediumImageURL {
+            cell.postImageView.loadImageUsingCacheWithURL(url: imageURL, type: .normal) { (success, error) in
+                if error != nil {
+                    print("Cell image error: \(error)")
+                }
+            }
+        }
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == (results.count - numberOfItemsBeforeLoadingNextPage) && !searchActive {
-            print("Loading more content... 👯")
+        if indexPath.row == (results.count - api.numberOfItemsBeforeStartLoadingNextPage) && !searchActive {
+            print("Loading more content... total loaded: \(results.count)")
             self.loadData()
         }
     }

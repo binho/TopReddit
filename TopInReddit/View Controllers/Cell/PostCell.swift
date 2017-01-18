@@ -15,6 +15,13 @@ protocol PostCellDelegate {
 
 class PostCell: UITableViewCell {
     
+    var hasImage: Bool? = true {
+        didSet {
+            // Update image height if cell don't have an image
+            postImageViewHeightConstraint.constant = (hasImage! ? 182 : 0)
+        }
+    }
+    
     open var delegate: PostCellDelegate?
     
     static let reuseIdentifier = "PostCellIdentifier"
@@ -23,19 +30,10 @@ class PostCell: UITableViewCell {
         didSet {
             guard postViewModel != nil else { return }
 
-            if postViewModel!.post.gifImageURL != nil {
-                tagLabel.isHidden = false
-            }
-            
-            self.postLabel.text = postViewModel!.titleString
-            self.topLabel.attributedText = postViewModel!.authorAndTimeAgoString
-            self.bottomLabel.attributedText = postViewModel!.totalCommentsAndUpvotesString
-            
-            if let imageURL = postViewModel!.post.mediumImageURL {
-                self.postImageView.loadImageUsingCacheWithURL(url: imageURL, type: .normal) { (success, error) in
-                    print(success)
-                }
-            }
+            tagLabel.isHidden = (postViewModel!.post.gifImageURL == nil)
+            postLabel.text = postViewModel!.titleString
+            topLabel.attributedText = postViewModel!.authorAndTimeAgoString
+            bottomLabel.attributedText = postViewModel!.totalCommentsAndUpvotesString
         }
     }
     
@@ -48,6 +46,7 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var bottomButton: UIButton!
     
     override func prepareForReuse() {
+        imageView?.image = nil
         tagLabel.isHidden = true
     }
     
@@ -62,7 +61,7 @@ class PostCell: UITableViewCell {
         self.separatorInset = .zero
         self.selectionStyle = .none
         
-        // Improves scrolling performance
+        // To improve scrolling performance
         postImageView.layer.shouldRasterize = true
         postImageView.layer.rasterizationScale = UIScreen.main.scale
         
