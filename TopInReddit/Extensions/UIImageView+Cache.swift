@@ -15,11 +15,14 @@ extension UIImageView {
     func loadImageUsingCacheWithURL(url: URL, type: ImageType, callback: @escaping imageCacheCallback) {
         self.image = nil
         
-        let cacheKey = NSString(string: url.absoluteString)
+        // Prefix image cache name with type so we don't override normal and animated
+        let cacheKey = NSString(string: "\(type.rawValue)-\(url.lastPathComponent)")
         
         if let cachedImage = imageCache.object(forKey: cacheKey) {
-            //print("[\(type.rawValue)] Loading image from cache: \(cacheKey)")
+            print("[\(type.rawValue)] Loaded image from cache: \(cacheKey)")
+            
             self.image = cachedImage
+            
             callback(true, nil)
             return
         } else {
@@ -32,13 +35,11 @@ extension UIImageView {
                         //print("[\(type.rawValue)] Downloaded image and save on cache: \(cacheKey)")
                         
                         if type == .animated {
-                            // Gif
                             if let animatedImage = UIImage.gif(data: data!) {
                                 imageCache.setObject(animatedImage, forKey: cacheKey)
                                 self.image = animatedImage
                             }
                         } else if type == .normal {
-                            // Normal
                             if let normalImage = UIImage(data: data!) {
                                 imageCache.setObject(normalImage, forKey: cacheKey)
                                 self.image = normalImage
