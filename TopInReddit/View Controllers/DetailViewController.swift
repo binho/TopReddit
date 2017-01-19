@@ -28,6 +28,20 @@ class DetailViewController: UIViewController {
         self.setupUI()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //  Check for connection status
+        guard InternetManager.isConnected() else {
+            InternetManager.showInternetRequiredMessageInViewController(self)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.activityIndicatorView.stopAnimating()
+            }
+            return
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -66,10 +80,11 @@ class DetailViewController: UIViewController {
     func setupUI() {
         self.view.backgroundColor = UIColor.white
         imageView.contentMode = .scaleAspectFit
+
+        bottomLabel.attributedText = postViewModel?.totalCommentsAndUpvotesString
         
+        // Load image
         startedLoadingImage()
-        
-        // First let's try to load animated GIF
         if let gifImageURL = postViewModel?.post.gifImageURL {
             imageView.loadImageUsingCacheWithURL(url: gifImageURL, type: .animated) { (success, error) in
                 self.finishedLoadingImageWithSuccess(success)
@@ -79,8 +94,6 @@ class DetailViewController: UIViewController {
                 self.finishedLoadingImageWithSuccess(success)
             }
         }
-        
-        bottomLabel.attributedText = postViewModel?.totalCommentsAndUpvotesString
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {

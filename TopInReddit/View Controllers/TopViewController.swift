@@ -28,6 +28,17 @@ class TopViewController: UITableViewController, UISearchBarDelegate, PostCellDel
     }
     
     func loadData() {
+        //  Check for connection status before trying to call API
+        guard InternetManager.isConnected() else {
+            InternetManager.showInternetRequiredMessageInViewController(self)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.refreshControl?.endRefreshing()
+                self.activityIndicatorView.stopAnimating()
+            }
+            return
+        }
+        
         activityIndicatorView.startAnimating()
 
         api.getTopPosts() { (data, error) in

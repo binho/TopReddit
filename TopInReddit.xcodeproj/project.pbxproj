@@ -23,6 +23,7 @@
 		5758424C1E2ED1D800A4E977 /* UIImageView+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5758424B1E2ED1D800A4E977 /* UIImageView+Cache.swift */; };
 		5758424E1E2FBBA500A4E977 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5758424D1E2FBBA500A4E977 /* DetailViewController.swift */; };
 		575842511E2FCCD400A4E977 /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575842501E2FCCD400A4E977 /* UIImage+Gif.swift */; };
+		57ABDE2B1E30D0B700CC2077 /* InternetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ABDE2A1E30D0B700CC2077 /* InternetManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		5758424B1E2ED1D800A4E977 /* UIImageView+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Cache.swift"; sourceTree = "<group>"; };
 		5758424D1E2FBBA500A4E977 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		575842501E2FCCD400A4E977 /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
+		57ABDE2A1E30D0B700CC2077 /* InternetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 			children = (
 				575842401E2E9B0A00A4E977 /* APIClient.swift */,
 				575842421E2E9D5800A4E977 /* RedditAPI.swift */,
+				57ABDE2A1E30D0B700CC2077 /* InternetManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57ABDE2B1E30D0B700CC2077 /* InternetManager.swift in Sources */,
 				575842471E2EA23200A4E977 /* PostViewModel.swift in Sources */,
 				5758423F1E2E986500A4E977 /* TopViewController.swift in Sources */,
 				5758423D1E2E94AE00A4E977 /* UIColor+Hex.swift in Sources */,
