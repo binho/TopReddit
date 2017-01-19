@@ -55,7 +55,7 @@
                                             <rect key="frame" x="0.0" y="62" width="375" height="182"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="182" id="E6s-TK-FKi"/>
+                                                <constraint firstAttribute="height" priority="750" constant="182" id="E6s-TK-FKi"/>
                                             </constraints>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZD-jF-VSZ">
