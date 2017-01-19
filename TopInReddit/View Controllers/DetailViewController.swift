@@ -39,21 +39,44 @@ class DetailViewController: UIViewController {
         closeButton.layer.masksToBounds = true
     }
     
+    func startedLoadingImage() {
+        DispatchQueue.main.async {
+            self.activityIndicatorView.startAnimating()
+            self.saveButton.isEnabled = false
+            self.saveButton.alpha = 0.4
+        }
+    }
+    
+    func finishedLoadingImageWithSuccess(_ success: Bool) {
+        DispatchQueue.main.async {
+            self.activityIndicatorView.stopAnimating()
+            self.saveButton.isEnabled = success
+            self.saveButton.alpha = (success ? 1.0 : 0.4)
+            
+            // When we finish loading do a quick animation on save button to trigger user atention
+            if (success) {
+                self.saveButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                UIView.animate(withDuration: 1.5, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 6.0, options: .allowUserInteraction, animations: { [weak self] in
+                    self?.saveButton.transform = CGAffineTransform.identity
+                }, completion: nil)
+            }
+        }
+    }
+    
     func setupUI() {
         self.view.backgroundColor = UIColor.white
-        
         imageView.contentMode = .scaleAspectFit
         
-        self.activityIndicatorView.startAnimating()
+        startedLoadingImage()
         
         // First let's try to load animated GIF
         if let gifImageURL = postViewModel?.post.gifImageURL {
             imageView.loadImageUsingCacheWithURL(url: gifImageURL, type: .animated) { (success, error) in
-                self.activityIndicatorView.stopAnimating()
+                self.finishedLoadingImageWithSuccess(success)
             }
         } else if let largeImageURL = postViewModel?.post.largeImageURL {
             imageView.loadImageUsingCacheWithURL(url: largeImageURL, type: .normal) { (success, error) in
-                self.activityIndicatorView.stopAnimating()
+                self.finishedLoadingImageWithSuccess(success)
             }
         }
         
