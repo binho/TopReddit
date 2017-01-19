@@ -28,9 +28,10 @@ class TopInRedditUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testPostCellCount() {
+        let app = XCUIApplication()
+        let cells = app.tables.cells
+        XCTAssert(cells.count > 0, "No cells found")
     }
     
 }

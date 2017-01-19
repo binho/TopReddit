@@ -21,15 +21,47 @@ class TopInRedditTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testModelCreatingWithBasicInfo() {
+        let model = Post(guid: "5oq8ak", title: "A two for one special")
+        let viewModel = PostViewModel(post: model)
+        
+        XCTAssertEqual(model.guid, "5oq8ak")
+        XCTAssertEqual(viewModel.post.guid, "5oq8ak")
+        XCTAssertEqual(viewModel.titleString, "A two for one special")
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
+    func testPostModelWithEmptyJSON() {
+        let fakeJSON = [String: AnyObject]()
+        let model = Post.createFromJSON(fakeJSON)
+        
+        XCTAssert(model == nil, "Model should be nil")
+    }
+    
+    func testPostModelWithNilPropertiesFromJSON() {
+        let fakeJSON: [String: AnyObject] = [
+            "title" : "A two for one special" as AnyObject,
+            "id" : "5oq8ak" as AnyObject
+        ]
+        
+        let model = Post.createFromJSON(fakeJSON)
+        
+        XCTAssert(model != nil, "Model is nil")
+    }
+    
+    func testLoadPostsAndCount() {
+        let api = RedditAPI()
+        api.getTopPosts { (data, error) in
+            XCTAssert(data!.count > 0, "Failed to load posts")
+        }
+    }
+    
+    func testLoadingPostsPerformance() {
+        let api = RedditAPI()
+        
         self.measure {
-            // Put the code you want to measure the time of here.
+            api.getTopPosts { (data, error) in
+                print("Finished loading posts")
+            }
         }
     }
     

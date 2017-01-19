@@ -10,7 +10,8 @@ import Foundation
 
 class RedditAPI {
     
-    // this is the number of cells before reach end of page that we should start loading the next page
+    // this is the number of cells before reach end of
+    // page that we should start loading the next page
     let numberOfItemsBeforeStartLoadingNextPage = 3
     
     private let itemsPerPage = 10

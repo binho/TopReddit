@@ -19,7 +19,7 @@ extension UIImageView {
         let cacheKey = NSString(string: "\(type.rawValue)-\(url.lastPathComponent)")
         
         if let cachedImage = imageCache.object(forKey: cacheKey) {
-            print("[\(type.rawValue)] Loaded image from cache: \(cacheKey)")
+            //print("[\(type.rawValue)] Loaded image from cache: \(cacheKey)")
             
             self.image = cachedImage
             
