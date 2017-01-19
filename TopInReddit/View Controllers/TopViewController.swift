@@ -10,8 +10,10 @@ import UIKit
 
 class TopViewController: UITableViewController, UISearchBarDelegate, PostCellDelegate {
     
+    private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+    
     // Search/Filter
-    var searchBar: UISearchBar!
+    private var searchBar: UISearchBar!
     private var searchActive : Bool = false
     private var filteredResults: [PostViewModel] = []
     
@@ -30,26 +32,35 @@ class TopViewController: UITableViewController, UISearchBarDelegate, PostCellDel
         if api.nextPage.isEmpty {
             self.results.removeAll()
         }*/
+        
+        activityIndicatorView.startAnimating()
 
         api.getTopPosts() { (data, error) in
             self.results.append(contentsOf: (data as! [PostViewModel]))
             
             DispatchQueue.main.async {
+                self.activityIndicatorView.stopAnimating()
                 self.tableView.reloadData()
             }
         }
     }
     
     func setupUI() {
-        self.title = "Top Reddit Posts"
+        self.title = "Top Reddit"
 
-        // Filter
+        // Setup search bar
         searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 40))
         searchBar.searchBarStyle = .minimal
         searchBar.placeholder = "Filter posts"
         searchBar.delegate = self
         tableView.tableHeaderView = searchBar
         tableView.tableFooterView = UIView(frame: .zero)
+        
+        // Setup activity indicator view
+        activityIndicatorView.hidesWhenStopped = true
+        activityIndicatorView.center = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height/2 - 60)
+        self.view.addSubview(activityIndicatorView)
+        self.view.bringSubview(toFront: activityIndicatorView)
         
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableViewAutomaticDimension

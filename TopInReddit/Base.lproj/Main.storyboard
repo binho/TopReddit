@@ -26,7 +26,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="304"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Post title goes here" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yc0-7z-ROy">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post title goes here" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yc0-7z-ROy">
                                             <rect key="frame" x="8" y="33" width="359" height="21"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -44,9 +44,12 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="cleber / 1 minute ago" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWA-Ey-TAX">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cleber / 1 minute ago" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWA-Ey-TAX">
                                             <rect key="frame" x="8" y="8" width="359" height="21"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="y79-FP-RNX"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -169,7 +172,7 @@
                                                 <action selector="saveButtonTapped:" destination="Q2n-lW-Efa" eventType="touchUpInside" id="0x0-l4-KB1"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="💬 0   🔝 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVR-gu-tuc">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVR-gu-tuc">
                                             <rect key="frame" x="20" y="20" width="180" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -191,33 +194,35 @@
                                 </constraints>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkK-dL-KoF">
-                                <rect key="frame" x="16" y="20" width="40" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="eAN-dZ-omR">
+                                <rect key="frame" x="178" y="277" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkK-dL-KoF">
+                                <rect key="frame" x="325" y="10" width="40" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="1"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="aKK-53-aC9"/>
-                                    <constraint firstAttribute="width" constant="40" id="yIf-Ct-TYC"/>
+                                    <constraint firstAttribute="width" constant="40" id="A8V-6o-dRB"/>
+                                    <constraint firstAttribute="height" constant="40" id="Lqc-Go-ec4"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <inset key="titleEdgeInsets" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="❌"/>
                                 <connections>
                                     <action selector="closeButtonTapped:" destination="Q2n-lW-Efa" eventType="touchUpInside" id="Zgs-Fn-2FY"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="eAN-dZ-omR">
-                                <rect key="frame" x="178" y="277" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="loq-KA-lT0" firstAttribute="top" secondItem="wkK-dL-KoF" secondAttribute="bottom" constant="-60" id="2Pt-dg-h5F"/>
-                            <constraint firstItem="loq-KA-lT0" firstAttribute="leading" secondItem="wkK-dL-KoF" secondAttribute="trailing" constant="-56" id="Amd-qt-faS"/>
                             <constraint firstItem="loq-KA-lT0" firstAttribute="top" secondItem="hJp-iv-D6Y" secondAttribute="top" id="Gwf-qf-14L"/>
                             <constraint firstItem="Ia6-BY-BG7" firstAttribute="top" secondItem="EdD-z1-wSC" secondAttribute="bottom" id="WT6-yx-Deb"/>
                             <constraint firstAttribute="trailing" secondItem="loq-KA-lT0" secondAttribute="trailing" id="Xkd-Gx-Iec"/>
                             <constraint firstItem="Ia6-BY-BG7" firstAttribute="top" secondItem="loq-KA-lT0" secondAttribute="bottom" id="ZSg-34-Oie"/>
                             <constraint firstItem="EdD-z1-wSC" firstAttribute="leading" secondItem="hJp-iv-D6Y" secondAttribute="leading" id="eXK-5X-2d6"/>
+                            <constraint firstAttribute="trailing" secondItem="wkK-dL-KoF" secondAttribute="trailing" constant="10" id="ibF-JS-je3"/>
                             <constraint firstItem="loq-KA-lT0" firstAttribute="leading" secondItem="hJp-iv-D6Y" secondAttribute="leading" id="lxi-SB-TOh"/>
+                            <constraint firstItem="wkK-dL-KoF" firstAttribute="top" secondItem="ck4-hd-12C" secondAttribute="bottom" constant="10" id="osD-1y-cz4"/>
                             <constraint firstItem="eAN-dZ-omR" firstAttribute="centerX" secondItem="hJp-iv-D6Y" secondAttribute="centerX" id="tH2-Dk-vjO"/>
                             <constraint firstItem="eAN-dZ-omR" firstAttribute="centerY" secondItem="hJp-iv-D6Y" secondAttribute="centerY" constant="-46.5" id="uev-vA-LPy"/>
                             <constraint firstAttribute="trailing" secondItem="EdD-z1-wSC" secondAttribute="trailing" id="x2U-yQ-UQk"/>

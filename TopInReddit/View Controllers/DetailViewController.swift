@@ -33,6 +33,10 @@ class DetailViewController: UIViewController {
         
         saveButton.layer.cornerRadius = 15
         saveButton.layer.masksToBounds = true
+        
+        closeButton.backgroundColor = UIColor(hexString: "e5e5e5")
+        closeButton.layer.cornerRadius = 20
+        closeButton.layer.masksToBounds = true
     }
     
     func setupUI() {
