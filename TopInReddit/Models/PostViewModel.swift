@@ -29,12 +29,12 @@ class PostViewModel {
         let timeAgo = timeAgoSinceDate(date: NSDate(timeIntervalSince1970: post.createdAt), numericDates: true)
         let author = (post.author ?? "Anonymous")
         
-        let attributedString = NSMutableAttributedString(string: "\(author) / \(timeAgo)")
+        let attributedString = NSMutableAttributedString(string: "Posted by \(author) \(timeAgo)")
         
         let authorRange = (attributedString.string as NSString).range(of: author)
         
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: authorRange)
-        attributedString.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFont(ofSize: 13), range: authorRange)
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(hexString: "3498db"), range: authorRange)
+        //attributedString.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFont(ofSize: 12), range: authorRange)
         
         return attributedString
     }
