@@ -102,22 +102,41 @@ class TopViewController: UITableViewController, UISearchBarDelegate, PostCellDel
         }
     }
     
+    // MARK: - UIScrollViewDelegate
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        // If search is first response lets remove focus when start scrolling
+        if self.searchBar.isFirstResponder {
+            self.view.endEditing(true)
+        }
+    }
+    
     // MARK: - UISearchBarDelegate
+    
+    func searchBarDismiss() {
+        searchActive = false
+        filteredResults.removeAll()
+        
+        DispatchQueue.main.async {
+            self.searchBar.resignFirstResponder()
+        }
+    }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true
+        filteredResults = results
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchActive = false
+        searchBarDismiss()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false
+        searchBarDismiss()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false
+        searchBarDismiss()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
