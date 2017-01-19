@@ -116,8 +116,11 @@ class TopViewController: UITableViewController, UISearchBarDelegate, PostCellDel
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == (results.count - api.numberOfItemsBeforeStartLoadingNextPage) && !searchActive {
-            print("Loading more content... total loaded: \(results.count)")
+        if (indexPath.row == (results.count - api.itemsBeforeLoadingNext)) &&
+            (results.count < api.itemsLimit) &&
+            !searchActive {
+            
+            print("Loading more content. Total before load more: \(results.count)")
             self.loadData()
         }
     }

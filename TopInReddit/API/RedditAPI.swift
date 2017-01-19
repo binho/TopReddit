@@ -12,9 +12,13 @@ class RedditAPI {
     
     // this is the number of cells before reach end of
     // page that we should start loading the next page
-    let numberOfItemsBeforeStartLoadingNextPage = 3
+    let itemsBeforeLoadingNext = 3
+    
+    // Limit infinite pagination in number of items
+    let itemsLimit = 50
     
     private let itemsPerPage = 10
+    
     
     // Store next page for infinite pagination
     private var nextPage: String = ""
