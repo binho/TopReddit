@@ -28,11 +28,6 @@ class TopViewController: UITableViewController, UISearchBarDelegate, PostCellDel
     }
     
     func loadData() {
-        /*
-        if api.nextPage.isEmpty {
-            self.results.removeAll()
-        }*/
-        
         activityIndicatorView.startAnimating()
 
         api.getTopPosts() { (data, error) in
