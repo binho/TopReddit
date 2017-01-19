@@ -10,13 +10,17 @@ import Foundation
 
 class RedditAPI {
     
-    let itemsPerPage = 10
-    
     // this is the number of cells before reach end of page that we should start loading the next page
     let numberOfItemsBeforeStartLoadingNextPage = 3
     
+    private let itemsPerPage = 10
+    
     // Store next page for infinite pagination
-    var nextPage: String = ""
+    private var nextPage: String = ""
+    
+    func resetPagination() {
+        nextPage = ""
+    }
     
     func getTopPosts(callback: @escaping APIClient.APICallback) {
         

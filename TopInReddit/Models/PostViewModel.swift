@@ -19,10 +19,12 @@ class PostViewModel {
         return post.title
     }
     
+    // Total comments and upvotes
     var totalCommentsAndUpvotesString: NSAttributedString {
         return NSAttributedString(string: "💬 \(post.totalComments ?? 0)   ⬆️ \(post.totalUpvotes ?? 0)")
     }
     
+    // Show author and time ago
     var authorAndTimeAgoString: NSAttributedString {
         let timeAgo = timeAgoSinceDate(date: NSDate(timeIntervalSince1970: post.createdAt), numericDates: true)
         let author = (post.author ?? "Anonymous")

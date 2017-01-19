@@ -129,6 +129,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="6do-xJ-D2D"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="bZ8-XJ-dZk">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <attributedString key="attributedTitle"/>
+                    </refreshControl>
                     <connections>
                         <segue destination="Q2n-lW-Efa" kind="presentation" identifier="detailSegue" id="eep-iZ-6H5"/>
                     </connections>

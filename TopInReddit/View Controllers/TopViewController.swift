@@ -39,10 +39,21 @@ class TopViewController: UITableViewController, UISearchBarDelegate, PostCellDel
             self.results.append(contentsOf: (data as! [PostViewModel]))
             
             DispatchQueue.main.async {
+                self.refreshControl?.endRefreshing()
                 self.activityIndicatorView.stopAnimating()
                 self.tableView.reloadData()
             }
         }
+    }
+    
+    func refreshData(sender: AnyObject) {
+        api.resetPagination()
+        
+        // Remove all stored
+        results.removeAll()
+        filteredResults.removeAll()
+        
+        loadData()
     }
     
     func setupUI() {
@@ -61,6 +72,9 @@ class TopViewController: UITableViewController, UISearchBarDelegate, PostCellDel
         activityIndicatorView.center = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height/2 - 60)
         self.view.addSubview(activityIndicatorView)
         self.view.bringSubview(toFront: activityIndicatorView)
+        
+        // Setup pull to refresh
+        self.refreshControl?.addTarget(self, action: #selector(refreshData(sender:)), for: .valueChanged)
         
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableViewAutomaticDimension
