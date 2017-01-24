@@ -42,6 +42,15 @@ class DetailViewController: UIViewController {
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if self.imageView != nil {
+            self.imageView.removeFromSuperview()
+            self.imageView = nil
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

@@ -148,9 +148,14 @@ extension UIImage {
     }
 
     internal class func animatedImageWithSource(_ source: CGImageSource) -> UIImage? {
-        let count = CGImageSourceGetCount(source)
+        var count = CGImageSourceGetCount(source)
         var images = [CGImage]()
         var delays = [Int]()
+        
+        // Limit number of frames to process
+        if count > 200 {
+            count = 200
+        }
 
         // Fill arrays
         for i in 0..<count {
